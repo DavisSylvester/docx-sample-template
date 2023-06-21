@@ -3,8 +3,17 @@ import path from 'path';
 import fsp from 'fs/promises';
 
 
-import { Document, Packer, Paragraph, Table, TableRow, TextRun, TableCell, WidthType, BorderStyle } from 'docx';
+import { Document, Packer, Paragraph, Table, TableRow, TextRun, TableCell, WidthType, BorderStyle, ShadingType, IShadingAttributesProperties } from 'docx';
 
+const b: IShadingAttributesProperties = {
+    color: "#FFFFFF",
+    fill: "#880808"
+};
+
+const v: IShadingAttributesProperties = {
+    color: "#FFFFFF",
+    fill: "#EA3B52"
+};
 
 const doc = new Document({
     sections: [
@@ -43,7 +52,22 @@ const doc = new Document({
                                             style: BorderStyle.DASH_DOT_STROKED,
                                         },
                                     }, 
-                                                                       
+                                    shading: b,                     
+                                    children: [new Paragraph("hello")],
+                                }),
+
+                                new TableCell({
+                                    width: {
+                                        size: 75,
+                                        type: WidthType.PERCENTAGE,                                        
+                                    },
+                                    borders: {                                        
+                                        right: {                                            
+                                            size: 1,
+                                            style: BorderStyle.DASH_DOT_STROKED,
+                                        },
+                                    }, 
+                                    shading: v,                     
                                     children: [new Paragraph("hello")],
                                 }),
                             ],
